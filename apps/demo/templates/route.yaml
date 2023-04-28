@@ -6,7 +6,11 @@ spec:
   entryPoints:
     - web
   routes:
+  {{- if .Values.preview.enabled }}
+  - match: Host(`{{ .Values.ingressRoute.hostname }}`) && Headers(`{{ .Values.preview.header.name }}`, `{{ .Values.preview.header.value }}`)
+  {{- else }}
   - match: Host(`{{ .Values.host }}`)
+  {{- end }}
     kind: Rule
     services:
     - name: demo

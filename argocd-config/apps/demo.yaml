@@ -23,3 +23,57 @@ spec:
     automated:
       prune: true
       selfHeal: true
+
+
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: preview-demo-front
+spec:
+  goTemplate: true
+  generators:
+  - pullRequest:
+      github:
+        owner: myorg
+        # The Github repository
+        repo: training-argocd
+        # Reference to a Secret containing an access token. (optional)
+        tokenRef:
+          secretName: github-token
+          key: token
+        # Labels is used to filter the PRs that you want to target. (optional)
+        labels:
+        - preview
+  template:
+    metadata:
+      name: 'preview-demo-{{ .number }}'
+      annotations:
+        argocd.argoproj.io/manifest-generate-paths: .;..
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    spec:
+      project: apps
+      source:
+        helm:
+          releaseName: 'preview-demo-<front/back>-{{ .number }}'
+          parameters:
+            - name: preview.enabled
+              value: 'true'
+            - name: preview.header.name
+              value: landing-page-version
+            - name: preview.header.value
+              value: '{{ .branch }}'
+          skipCrds: false
+          valueFiles:
+            - values.yaml
+        path: apps/demo
+        repoURL: https://github.com/edix9/training-argocd.git
+        targetRevision: main
+      destination:
+        name: in-cluster
+        namespace: apps
+      syncPolicy:
+        automated:
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

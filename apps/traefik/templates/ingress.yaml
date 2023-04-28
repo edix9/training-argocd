@@ -17,4 +17,4 @@ spec:
           service:
             name: traefik
             port:
-              name: http
+              name: web
