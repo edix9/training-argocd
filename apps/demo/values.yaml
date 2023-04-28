@@ -1,0 +1,18 @@
+# values.yaml back
+generic:
+  replicaCount: 1
+  image:
+    repository: eu.gcr.io/padok-playground/demo-header-back
+    tag: v0.1.0
+    pullPolicy: Always
+  container:
+    port: 8000
+  service:
+    type: ClusterIP
+    port: 80
+  ingress:
+    enabled: false
+preview:
+  enabled: false
+hosts:
+- "demo-back-<YOUR_NAME>.playground.padok.cloud"

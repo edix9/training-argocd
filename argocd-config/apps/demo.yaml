@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: traefik
+  name: demo
   namespace: argocd
   annotations:
-    argocd.argoproj.io/manifest-generate-paths: /apps/traefik/
+    argocd.argoproj.io/manifest-generate-paths: /apps/demo/
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -18,7 +18,7 @@ spec:
         - values.yaml
     # ✏️ Your repository URL
     repoURL: https://github.com/edix9/training-argocd.git
-    path: apps/traefik
+    path: apps/demo
   syncPolicy:
     automated:
       prune: true
