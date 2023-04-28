@@ -19,8 +19,6 @@ spec:
     # ✏️ Your repository URL
     repoURL: https://github.com/edix9/training-argocd.git
     path: apps/traefik
-    directory:
-      recurse: true
   syncPolicy:
     automated:
       prune: true
