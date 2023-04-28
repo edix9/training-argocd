@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: /apps/traefik/
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: infrastructure
+  destination:
+    namespace: argocd
+    name: in-cluster
+  source:
+    helm:
+      valueFiles:
+        - values.yml
+    # ✏️ Your repository URL
+    repoURL: https://github.com/edix9/training-argocd.git
+    path: apps/traefik
+    directory:
+      recurse: true
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

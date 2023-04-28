@@ -1,0 +1,15 @@
+traefik:
+  name: traefik
+  ingressClass:
+    enabled: false
+  ingressRoute:
+    dashboard:
+      enabled: false
+  service:
+    spec:
+      type: ClusterIP
+  logs:
+    general:
+      level: INFO
+    access:
+      enabled: true
