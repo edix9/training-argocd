@@ -6,12 +6,8 @@ spec:
   entryPoints:
     - web
   routes:
-  {{- if .Values.preview.enabled }}
-  - match: Host(`{{ .Values.ingressRoute.hostname }}`) && Headers(`{{ .Values.preview.header.name }}`, `{{ .Values.preview.header.value }}`)
-  {{- else }}
-  - match: Host(`{{ .Values.hosts }}`)
+  - match: Host(`demo-alexandreh.playground.padok.cloud`)
     kind: Rule
     services:
     - name: demo
       port: 80
-  {{- end }}
