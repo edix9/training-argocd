@@ -9,5 +9,5 @@ spec:
   {{- if .Values.preview.enabled }}
   - match: Host(`{{ .Values.ingressRoute.hostname }}`) && Headers(`{{ .Values.preview.header.name }}`, `{{ .Values.preview.header.value }}`)
   {{- else }}
-  - match: Host(`{{ .Values.host }}`)
+  - match: Host(`{{ .Values.hosts }}`)
   {{- end }}
