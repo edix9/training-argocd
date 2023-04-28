@@ -14,4 +14,4 @@ generic:
     enabled: false
 preview:
   enabled: false
-hosts: "demo-alexandreh.playground.padok.cloud"
+host: "demo-alexandreh.playground.padok.cloud"
