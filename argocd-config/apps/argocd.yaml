@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: argocd
+    name: in-cluster
+  project: infrastructure
+  source:
+    # ✏️ Your repository URL
+    repoURL: https://github.com/edix9/training-argocd.git
+    targetRevision: HEAD
+    path: apps/argocd
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
