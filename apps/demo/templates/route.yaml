@@ -10,4 +10,8 @@ spec:
   - match: Host(`{{ .Values.ingressRoute.hostname }}`) && Headers(`{{ .Values.preview.header.name }}`, `{{ .Values.preview.header.value }}`)
   {{- else }}
   - match: Host(`{{ .Values.hosts }}`)
+    kind: Rule
+    services:
+    - name: demo
+      port: 80
   {{- end }}
