@@ -15,4 +15,4 @@ generic:
 preview:
   enabled: false
 hosts:
-- "demo-back-<YOUR_NAME>.playground.padok.cloud"
+- "demo-back-alexandreh.playground.padok.cloud"
